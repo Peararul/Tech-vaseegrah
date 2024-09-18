@@ -1,0 +1,53 @@
+import requests
+import json
+
+
+class Chatbot:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.api_url = "https://1f17-117-247-96-193.ngrok-free.app"  # Replace with actual Gemini API endpoint
+
+    def get_response(self, user_input):
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+        
+        payload = {
+            'input': user_input
+        }
+
+        response = requests.post(url=self.api_url,json=payload, headers=headers)
+        print('Status Code:', response.status_code)
+
+# Print the response content
+        print('Response Content:', response.text)
+        
+        if response.status_code != 200:
+            r=print("Sorry, I didn't understand that.")
+            return r
+        else:
+            #d=requests.get(url=self.api_url,json=payload)
+            d=requests.get(url=self.api_url,json=payload)
+            #f=d.json()
+        
+            return d.text
+        
+
+
+def main():
+    api_key = "AIzaSyAFAhfsuTtZV8Lrke97RXF1OaSZ1BY9MvQ"  # Replace with your actual API key
+    chatbot = Chatbot(api_key)
+
+    print("Welcome to the Chatbot! Type 'exit' to stop.")
+    
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == 'exit':
+            break
+        
+        bot_response = chatbot.get_response(user_input)
+        print("Bot:", bot_response)
+
+if __name__ == "__main__":
+    main()
