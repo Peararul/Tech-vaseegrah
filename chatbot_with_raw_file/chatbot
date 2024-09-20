@@ -1,0 +1,82 @@
+import json
+import random
+import requests
+import os
+
+# Function to load JSON data from file
+def load_json(filename):
+    with open(filename, 'r') as file:
+        data = json.load(file)
+    return data
+
+# Function to get response from local JSON intents
+def get_local_response(user_input, intents_data):
+    user_input = user_input.lower()
+
+    # Iterate through the intents in the JSON file
+    for intent in intents_data['intents']:
+        # Check if the user input matches any example from the intent
+        for example in intent['examples']:
+            if user_input == example.lower():
+                # Return a random response from the list of possible responses
+                return random.choice(intent['responses'])
+    
+    # If no match is found in the local data, return None
+    return None
+
+# Function to get response from an external chatbot API (like OpenAI or Gemini)
+def get_api_response(user_input, api_key):
+    # Define the API URL (this is an example, change it to your API's endpoint)
+    api_url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDPO_Lt6U-4NbTIiVli1ilezMwjgoJNlSM'  # Replace this with your chatbot API URL
+    
+    # Define the headers and payload for the API request
+    headers = {
+        'Authorization': f'Bearer {api_key}',  # Pass your API key
+        'Content-Type': 'application/json'
+    }
+    payload = {
+        "input": user_input  # This is the user's input to the chatbot
+    }
+    
+    try:
+        response = requests.post(api_url, headers=headers, json=payload)
+        response.raise_for_status()  # Raise an error for bad responses (4xx/5xx)
+        result = response.json()
+        # Assume the response contains a field 'output' for chatbot's reply
+        return result.get("output", "Sorry, I couldn't get a response.")
+    except requests.exceptions.RequestException as e:
+        return f"Error in fetching response: {str(e)}"
+
+# Main function to interact with the chatbot
+def chatbot():
+    # Load the chatbot data from the JSON file
+    chatbot_data = load_json('data.json')
+    
+    # Get the API key from environment variable (or hard-code it)
+    api_key = "AIzaSyDPO_Lt6U-4NbTIiVli1ilezMwjgoJNlSM"
+    
+    if not api_key:
+        print("Error: API Key not found. Please set the API key.")
+        return
+    
+    print("Chatbot: Hi! Ask me anything.")
+
+    while True:
+        user_input = input("You: ")
+
+        if user_input.lower() in ["exit", "quit"]:
+            print("Chatbot: Goodbye!")
+            break
+
+        # First, try to get a response from the local intents (JSON file)
+        response = get_local_response(user_input, chatbot_data)
+
+        if response is None:
+            # If no match is found in the JSON, use the external chatbot API
+            response = get_api_response(user_input, api_key)
+
+        print(f"Chatbot: {response}")
+
+# Start the chatbot
+if __name__ == '__main__':
+    chatbot()
