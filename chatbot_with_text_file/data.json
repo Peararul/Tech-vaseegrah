@@ -1,0 +1,67 @@
+{
+    "intents": [
+      {
+        "intent": "greeting",
+        "examples": [
+          "Hello",
+          "Hi",
+          "Hey"
+        ],
+        "responses": [
+          "Hello! How can I help you today?",
+          "Hi there! What can I do for you?"
+        ]
+      },
+      {
+        "intent": "goodbye",
+        "examples": ["Goodbye", "Bye"],
+        "responses": ["Goodbye! Have a great day!", "See you later! Take care!"]
+      },
+      {
+        "intent": "query",
+        "examples": [
+          "What should I feed the chicken ?",
+          "What is the best feed for chickens"
+        ],
+        "responses": [
+          "What breed is this chicken?",
+          "What type of chicken is this?"
+        ]
+      },
+      {
+        "intent": "broiler",
+        "examples": [
+          "Broiler",
+          "The chicken type is broiler",
+          "what should I feed broiler type chicken"
+        ],
+        "responses": [
+            "To feed broiler chickens effectively, start with a high-protein starter feed (20-24%) for the first 0-3 weeks to support rapid growth. Transition to a grower feed (18-20%) from 3 to 6 weeks, and then switch to a finisher feed (16-18%) until they are ready for market. Ensure they always have access to clean, fresh water and consider adding supplements for additional health benefits. Adjust feed quantities based on their size and growth stage, and monitor their health regularly."
+        ]
+      },
+      {
+        "intent": "Leghorn",
+        "examples": [
+          "Leghorn",
+          "The chicken type is Leghorn",
+          "what should I feed Leghorn type chicken"
+        ],
+        "responses": [
+            "Leghorn chickens, known for their excellent egg production, require a well-balanced diet to maintain health and productivity. Start with a high-protein starter feed (18-20%) for chicks up to 6 weeks old. Transition to a grower feed (16-18%) until they reach 18 weeks, then switch to a layer feed (16-18% protein) to support egg production. Provide constant access to clean water and consider offering oyster shells or calcium supplements for strong eggshells. Adjust their feed as needed based on their age, production stage, and overall health."
+        ]
+      },
+      {
+        "intent": "Red Ranger",
+        "examples": [
+          "Red Ranger ",
+          "The chicken type is Red Ranger ",
+          "what should I feed Red Ranger  type chicken"
+        ],
+        "responses": [
+            "Red Ranger chickens, ideal for both meat and egg production, should start with a high-protein starter feed (20-22%) for the first 4 weeks to support rapid growth. From 4 to 8 weeks, switch to a grower feed (18-20%). For those raised for meat, transition to a finisher feed (16-18%) until they reach market weight. If they're being kept for egg production, switch to a layer feed (16-18% protein) after 8 weeks. Ensure they have constant access to clean water and adjust their diet based on their specific growth or production stage."
+        ]
+      }
+
+    ]
+  }
+  
