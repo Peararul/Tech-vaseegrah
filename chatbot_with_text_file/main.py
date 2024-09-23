@@ -26,7 +26,7 @@ def load_json(filename):
 
 def ignore_prepositions(words):
     """Removes prepositions and articles from a list of words."""
-    stop_words = {"the", "what", "my", "best", "i", "?", "should", "an", "a", "in", "of", "to", "for", "and", "nor", "but", "or", "yet", "is", "so", "if", "because", "as", "while", "since", "until", "after", "before", "during", "while", "since", "until", "after", "before", "during", "although", "though", "even", "if", "unless", "except", "excepting", "besides", "except", "but", "save", "save", "except", "is", "but", "save"}
+    stop_words = {"the", "what", "my", "best", "i", "?", "should", "an", "a", "in", "of","to", "for", "and", "nor", "but", "or","yet", "is", "so", "if", "because","as", "while", "since", "until","after", "before", "during","while", "since", "until", "after", "before", "during","although", "though", "even", "if", "unless", "except","excepting", "besides", "except", "but", "save", "save", "except", "is", "but", "save", "in", "on", "at", "by", "for", "with", "about", "against", "between", "into", "through", "during", "before", "after", "above", "below","to", "from", "up", "down", "out", "over", "under", "again", "further", "then", "once","am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "do", "does", "did","shall", "will", "should", "would", "may", "might", "must", "can", "could", "i", "he", "she", "it", "we","they"}
     return [word.lower() for word in words if word.lower() not in stop_words]
 
 # Function to validate user input against the allowed words
@@ -80,7 +80,7 @@ def chatbot():
         x=["hi", "hello", "hey"]
         for i in range(len(x)):
             
-            if user_input.lower()==x[i]:
+            if user_input.lower()==x[i].lower():
                 print("Chatbot:Hello! How can I help you today?")
                 
                 
@@ -97,10 +97,15 @@ def chatbot():
                 print("Chatbot:Goodbye! Have a great day!")
         m=["Goodbye", "Bye", "who are you", "what are you", "hi", "hello", "hey" ]
         for l in range(len(m)):
-            if user_input.lower()!=m[l].lower():
+            if user_input.lower()==m[l].lower():
                 count=count+1
-        if count>0:
+                
+ 
+        if count==0:
+                count=0
+                
                 if is_valid_input(user_input, allowed_words):
+                    
         # Get the chatbot's response
                     response = get_local_response(user_input, chatbot_data)
             
@@ -108,8 +113,8 @@ def chatbot():
             # If no match is found in the JSON, use the external chatbot API
                         r = chat.send_message(user_input)
                         response=r.text
+                    
                     print(f"Chatbot: {response}")
-
                 else:
                     print("I can't answer your question")
         
